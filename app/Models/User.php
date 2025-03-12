@@ -22,6 +22,10 @@ class User extends Authenticatable
         'email',
         'password',
     ];
+    public function offers()
+    {
+        return $this->belongsToMany(offers::class)->withPivot('cv');
+    }
 
     /**
      * The attributes that should be hidden for serialization.
