@@ -21,26 +21,35 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
-route::get( '/users', [UserController::class, 'create']);
-route::post( '/users', [UserController::class, 'store']);
-route::post( '/login', [UserController::class, 'login']);
-route::get( '/users/{id}', [UserController::class, 'edit']);
-route::put( '/users/{id}', [UserController::class, 'update']);
+Route::get( '/users', [UserController::class, 'create']);
+Route::post( '/users', [UserController::class, 'store']);
+Route::post( '/login', [UserController::class, 'login']);
+
+Route::middleware('auth:sanctum')->group(function () {
+
+	Route::get( '/users/{id}', [UserController::class, 'edit']);
+	Route::put( '/users/{id}', [UserController::class, 'update']);
+
+	
+    
+	Route::get( '/offers_users', [OffersUserController::class, 'index']);
+	Route::get( '/offers_users/create', [OffersUserController::class, 'create']);
+	Route::post( '/offers_users', [OffersUserController::class, 'store']);
+	Route::get( '/offers_users/{id}', [OffersUserController::class, 'show']);
+	Route::get( '/offers_users/{id}/edit', [OffersUserController::class, 'edit']);
+	Route::put( '/offers_users/{id}', [OffersUserController::class, 'update']);
+	Route::delete( '/offers_users/{id}', [OffersUserController::class, 'destroy']);
+
+	
+    
+	Route::get( '/offers', [OffersController::class, 'index']);
+	Route::get( '/offers/create', [OffersController::class, 'create']);
+	Route::post( '/offers', [OffersController::class, 'store']);
+	Route::get( '/offers/{id}', [OffersController::class, 'show']);
+	Route::get( '/offers/{id}/edit', [OffersController::class, 'edit']);
+	Route::put( '/offers/{id}', [OffersController::class, 'update']);
+	Route::delete( '/offers/{id}', [OffersController::class, 'destroy']);
+
+});
 
 
-route::get( '/offers_users', [OffersUserController::class, 'index']);
-route::get( '/offers_users', [OffersUserController::class, 'create']);
-route::post( '/offers_users', [OffersUserController::class, 'store']);
-route::get( '/offers_users/{id}', [OffersUserController::class, 'show']);
-route::get( '/offers_users/{id}', [OffersUserController::class, 'edit']);
-route::put( '/offers_users/{id}', [OffersUserController::class, 'update']);
-route::delete( '/offers_users/{id}', [OffersUserController::class, 'destroy']);
-
-
-route::get( '/offers', [OffersController::class, 'index']);
-route::get( '/offers', [OffersController::class, 'create']);
-route::post( '/offers', [OffersController::class, 'store']);
-route::get( '/offers/{id}', [OffersController::class, 'show']);
-route::get( '/offers/{id}', [OffersController::class, 'edit']);
-route::put( '/offers/{id}', [OffersController::class, 'update']);
-route::delete( '/offers/{id}', [OffersController::class, 'destroy']);
