@@ -26,12 +26,13 @@ Route::post( '/users', [UserController::class, 'store']);
 Route::post( '/login', [UserController::class, 'login']);
 
 Route::middleware('auth:sanctum')->group(function () {
+    
 
 	Route::get( '/users/{id}', [UserController::class, 'edit']);
 	Route::put( '/users/{id}', [UserController::class, 'update']);
 
 	
-    
+
 	Route::get( '/offers_users', [OffersUserController::class, 'index']);
 	Route::get( '/offers_users/create', [OffersUserController::class, 'create']);
 	Route::post( '/offers_users', [OffersUserController::class, 'store']);
